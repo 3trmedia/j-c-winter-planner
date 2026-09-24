@@ -35,6 +35,17 @@ const TEAM_GOAL = {
   deadlineISO: "2026-10-31",
 };
 
+/** Kaden's month-by-month focus, October through April. */
+const KADEN_ROADMAP: { month: string; task: string }[] = [
+  { month: "October", task: "CEO Viewer" },
+  { month: "November", task: "Aranza Trained" },
+  { month: "December", task: "Aranza Dashboard" },
+  { month: "January", task: "Custom Quoter Updates (Estimator)" },
+  { month: "February", task: "Cultivator Turned Back On" },
+  { month: "March", task: "Reactivator Started (Collecting Names for May)" },
+  { month: "April", task: "Reviews & Referrals" },
+];
+
 const PERSON_GOALS: PersonGoal[] = [
   {
     person: "Jeffrey",
@@ -99,10 +110,13 @@ function formatShortDate(iso: string) {
   });
 }
 
-function daysLeft(deadlineISO: string, todayISO: string): number {
-  const deadline = new Date(`${deadlineISO}T00:00:00`);
-  const today = new Date(`${todayISO}T00:00:00`);
-  return Math.round((deadline.getTime() - today.getTime()) / 86_400_000);
+/** Kaden's focus for the upcoming calendar month (real current date, not the mock TODAY_ISO anchor). */
+function upcomingKadenTask(now: Date = new Date()) {
+  const upcomingMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1).toLocaleDateString(
+    undefined,
+    { month: "long" },
+  );
+  return KADEN_ROADMAP.find((r) => r.month === upcomingMonth) ?? null;
 }
 
 function SectionLabel({ children, accent }: { children: React.ReactNode; accent?: boolean }) {
@@ -309,6 +323,8 @@ function EventCalendar({ events }: { events: MarketingEvent[] }) {
 }
 
 export default function App() {
+  const kadenNext = upcomingKadenTask();
+
   return (
     <div className="min-h-screen bg-[#faf9f7] pb-10">
       <header className="flex items-center justify-between border-b border-neutral-100 bg-white px-5 py-4">
@@ -333,9 +349,11 @@ export default function App() {
                 year: "numeric",
               })}
             </span>
-            <span className="rounded-full bg-emerald-500/90 px-2.5 py-1 text-xs font-semibold text-white">
-              {daysLeft(TEAM_GOAL.deadlineISO, TODAY_ISO)} days left
-            </span>
+            {kadenNext && (
+              <span className="rounded-full bg-emerald-500/90 px-2.5 py-1 text-xs font-semibold text-white">
+                Kaden's up next: {kadenNext.task}
+              </span>
+            )}
           </div>
         </Section>
 
