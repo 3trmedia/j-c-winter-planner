@@ -351,7 +351,7 @@ export default function App() {
             </span>
             {kadenNext && (
               <span className="rounded-full bg-emerald-500/90 px-2.5 py-1 text-xs font-semibold text-white">
-                Kaden's up next: {kadenNext.task}
+                Up next: {kadenNext.task}
               </span>
             )}
           </div>
