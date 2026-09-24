@@ -38,8 +38,8 @@ const TEAM_GOAL = {
 /** Kaden's month-by-month focus, October through April. */
 const KADEN_ROADMAP: { month: string; task: string }[] = [
   { month: "October", task: "CEO Viewer" },
-  { month: "November", task: "Aranza Trained" },
-  { month: "December", task: "Aranza Dashboard" },
+  { month: "November", task: "Arantza Trained" },
+  { month: "December", task: "Arantza Dashboard" },
   { month: "January", task: "Custom Quoter Updates (Estimator)" },
   { month: "February", task: "Cultivator Turned Back On" },
   { month: "March", task: "Reactivator Started (Collecting Names for May)" },
